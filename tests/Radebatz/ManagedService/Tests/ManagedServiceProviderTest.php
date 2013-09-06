@@ -56,11 +56,11 @@ class ManagedServiceProviderTests extends PHPUnit_Framework_TestCase
         $this->assertTrue($initialized->getValue($provider1));
 
         // set some defaults
-        $app['pre2.default_options'] = array('foo' => 'bar');
+        $defaultOptions = array('foo' => 'bar');
         $provider2 = new ManagedServiceProvider('pre2', 'stdClass');
-        $app->register($provider2);
+        $app->register($provider2, array('pre2.default_options' => $defaultOptions));
 
-        $this->assertEquals($app['pre2.default_options'], array('foo' => 'bar'));
+        $this->assertEquals($defaultOptions, array('foo' => 'bar'));
     }
 
     public function testServiceClassName()
@@ -78,14 +78,34 @@ class ManagedServiceProviderTests extends PHPUnit_Framework_TestCase
     {
         $app = new Application();
         // add some options to make the closure work...
-        $app['pre.default_options'] = array('foo' => 'bar');
-        $app->register(new ManagedServiceProvider('pre', function($name, $options, $mms) { return json_decode(json_encode($options)); }));
+        $defaultOptions = array('foo' => 'bar');
+        $app->register(new ManagedServiceProvider('pre', function($name, $options, $mms) { return json_decode(json_encode($options)); }), array('pre.default_options' => $defaultOptions));
 
         // default
         $this->assertNotNull($app['pre']);
         $this->assertEquals('bar', $app['pre']->foo);
         $this->assertTrue($app['pre'] instanceof stdClass);
         $this->assertTrue($app['pres']['default'] instanceof stdClass);
+    }
+
+    public function testMultiConfig()
+    {
+        $app = new Application();
+        $app->register(new ManagedServiceProvider('pre', function($name, $options, $mms) { return json_decode(json_encode($options)); }));
+        $app['pres.options'] = array(
+            'reader' => array(
+                'name' => 'reader'
+            ),
+            'writer' => array(
+                'name' => 'writer'
+            ),
+        );
+
+        $this->assertNotNull($app['pre']);
+        $this->assertTrue($app['pres']['reader'] instanceof stdClass);
+        $this->assertEquals('reader', $app['pres']['reader']->name);
+        $this->assertTrue($app['pres']['writer'] instanceof stdClass);
+        $this->assertEquals('writer', $app['pres']['writer']->name);
     }
 
 }
