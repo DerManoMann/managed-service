@@ -1,0 +1,12 @@
+language: php
+
+before_script:
+  - composer self-update
+  - composer --dev install
+
+php:
+  - 5.3
+  - 5.4
+
+after_script:
+  - php vendor/bin/coveralls -v
