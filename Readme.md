@@ -1,6 +1,8 @@
 A generic Silex service provider for managed services
 =====================================================
 
+[![Build Status](https://travis-ci.org/DerManoMann/managed-service.png)](https://travis-ci.org/DerManoMann/managed-service)
+
 Managed services is a Silex service provider that allows to manage a given service for
 multiple configurations.
 
