@@ -2,7 +2,8 @@ A generic Silex service provider for managed services
 =====================================================
 
 [![Build Status](https://travis-ci.org/DerManoMann/managed-service.png)](https://travis-ci.org/DerManoMann/managed-service)
-[![Coverage Status](https://coveralls.io/repos/DerManoMann/acache/managed-service.png)](https://coveralls.io/r/DerManoMann/managed-service)
+[![Coverage Status](https://coveralls.io/repos/DerManoMann/managed-service/badge.png)](https://coveralls.io/r/DerManoMann/managed-service)
+
 
 Managed services is a Silex service provider that allows to manage a given service for
 multiple configurations.
