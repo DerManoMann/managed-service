@@ -67,6 +67,11 @@ class ManagedServiceProvider implements ServiceProviderInterface
 
             $tmp = $app[$prefix.'s.options'];
             foreach ($tmp as $name => &$options) {
+                if (!is_array($options)) {
+                    unset($tmp[$name]);
+                    continue;
+                }
+
                 $options = array_replace($app[$prefix.'.default_options'], $options);
 
                 if (!isset($app[$prefix.'s.default'])) {
