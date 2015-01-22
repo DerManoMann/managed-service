@@ -1,7 +1,7 @@
 {
     "minimum-stability": "dev",
     "name": "radebatz/managed-service",
-    "description": "Generic multi config service service provider.",
+    "description": "Generic silex multi config service service provider.",
     "license": [
         "MIT"
     ],
@@ -18,7 +18,7 @@
     },
     "require": {
         "php": ">=5.3.0",
-        "silex/silex": "~1.0"
+        "silex/silex": "~2.0@dev"
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master"
@@ -30,7 +30,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "2.0.x-dev"
         }
     }
 }
