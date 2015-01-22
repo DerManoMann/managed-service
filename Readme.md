@@ -1,9 +1,10 @@
 A generic Silex service provider for managed services
 =====================================================
 
-.. caution::
+Caution:
 
-    The master branch now depends on Silex 2. For Silex 1.x applications use the 1.x version(s).
+    The master branch now depends on Silex 2. 
+    For Silex 1.x applications use the 1.x version(s).
 
 
 [![Build Status](https://travis-ci.org/DerManoMann/managed-service.png)](https://travis-ci.org/DerManoMann/managed-service)
