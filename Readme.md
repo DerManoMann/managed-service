@@ -33,7 +33,7 @@ run the `php composer.phar install` command to install it:
         }
     }
 
-Alternatively, you can download the [`managed-service.zip`][2] file and extract it.
+Alternatively, you can download the [`managed-service.zip`][1] file and extract it.
 
 
 
