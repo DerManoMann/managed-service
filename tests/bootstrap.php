@@ -1,7 +1,7 @@
 <?php
 
 /*
-* This file is part of the ACache library.
+* This file is part of the managed-service silex provider library.
 *
 * (c) Martin Rademacher <mano@radebatz.net>
 *
