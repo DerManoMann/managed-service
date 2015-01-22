@@ -11,9 +11,9 @@
 
 namespace Radebatz\ManagedService;
 
-use Pimple;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Silex\Application;
-use Silex\ServiceProviderInterface;
 
 /**
  * Manage a single service with multiple configurations.
@@ -46,7 +46,7 @@ class ManagedServiceProvider implements ServiceProviderInterface
     /**
      * {@inheritDoc}
      */
-    public function register(Application $app)
+    public function register(Container $app)
     {
         $prefix = $this->prefix;
         $service = $this->service;
@@ -81,37 +81,29 @@ class ManagedServiceProvider implements ServiceProviderInterface
             $app[$prefix.'s.options'] = $tmp;
         });
 
-        $app[$prefix.'s'] = $app->share(function ($app) use ($prefix, $service) {
+        $app[$prefix.'s'] = function ($app) use ($prefix, $service) {
             $app[$prefix.'s.options.initializer']();
-            $mms = new Pimple();
+            $mms = new Container();
             $isCallable = is_callable($service);
             foreach ($app[$prefix.'s.options'] as $name => $options) {
                 $mms[$name] = $isCallable ? call_user_func($service, $name, $options, $mms) : $mms[$name] = new $service($options);
             }
 
             return $mms;
-        });
+        };
 
         // shortcut for default/first service
-        $app[$prefix] = $app->share(function ($app) use ($prefix) {
+        $app[$prefix] = function ($app) use ($prefix) {
             $mms = $app[$prefix.'s'];
 
             return $mms[$app[$prefix.'s.default']];
-        });
+        };
         // shortcut for default/first config
-        $app[$prefix.'.config'] = $app->share(function ($app) use ($prefix) {
+        $app[$prefix.'.config'] = function ($app) use ($prefix) {
             $mms = $app[$prefix.'s.config'];
 
             return $mms[$app[$prefix.'s.default']];
-        });
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function boot(Application $app)
-    {
-        // nothing
+        };
     }
 
 }

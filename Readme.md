@@ -1,6 +1,11 @@
 A generic Silex service provider for managed services
 =====================================================
 
+.. caution::
+
+    The master branch now depends on Silex 2. For Silex 1.x applications use the 1.x version(s).
+
+
 [![Build Status](https://travis-ci.org/DerManoMann/managed-service.png)](https://travis-ci.org/DerManoMann/managed-service)
 [![Coverage Status](https://coveralls.io/repos/DerManoMann/managed-service/badge.png)](https://coveralls.io/r/DerManoMann/managed-service)
 
@@ -29,7 +34,7 @@ run the `php composer.phar install` command to install it:
 
     {
         "require": {
-            "radebatz/managed-service": "1.0.*@dev"
+            "radebatz/managed-service": "2.0.*@dev"
         }
     }
 
