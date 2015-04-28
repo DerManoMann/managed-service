@@ -86,7 +86,9 @@ class ManagedServiceProvider implements ServiceProviderInterface
             $mms = new Container();
             $isCallable = is_callable($service);
             foreach ($app[$prefix.'s.options'] as $name => $options) {
-                $mms[$name] = $isCallable ? call_user_func($service, $name, $options, $mms) : $mms[$name] = new $service($options);
+                $mms[$name] = function () use ($isCallable, $service, $name, $options, $mms) {
+                    return $isCallable ? call_user_func($service, $name, $options, $mms) : new $service($options);
+                };
             }
 
             return $mms;
