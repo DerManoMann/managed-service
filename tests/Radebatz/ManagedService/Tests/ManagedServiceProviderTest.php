@@ -108,4 +108,36 @@ class ManagedServiceProviderTests extends PHPUnit_Framework_TestCase
         $this->assertEquals('writer', $app['pres']['writer']->name);
     }
 
+    public function testLazyLoading()
+    {
+        // have a global counter to keep track of each init
+        $count = 0;
+
+        $app = new Application();
+        $app->register(new ManagedServiceProvider('pre', function($name, $options, $mms) use (&$count) {
+            $obj = json_decode(json_encode($options));
+            $obj->count = ++$count;
+
+            return $obj;
+        }));
+        $app['pres.options'] = array(
+            'reader' => array(
+                'name' => 'reader'
+            ),
+            'writer' => array(
+                'name' => 'writer'
+            ),
+        );
+
+        // nothing accessed yet
+        $this->assertEquals(0, $count);
+        // accessed first instance
+        $this->assertTrue($app['pres']['reader'] instanceof stdClass);
+        $this->assertEquals(1, $app['pres']['reader']->count);
+        $this->assertEquals(1, $count);
+        // accessed second instance
+        $this->assertTrue($app['pres']['writer'] instanceof stdClass);
+        $this->assertEquals(2, $app['pres']['writer']->count);
+    }
+
 }
