@@ -19,7 +19,6 @@ multiple different configurations in a single application, then this might be fo
 
 
 ## Features
-
 Managed services works similar to the `DoctrineServiceProvider`. It allows to configure
 multiple instances of a service with different options.
 
@@ -28,23 +27,19 @@ wrap them in an instance of `ManagedServiceProvider`.
 
 
 ## Installation
-
 The recommended way to install managed-services is [through
-composer](http://getcomposer.org). Just create a `composer.json` file and
-run the `php composer.phar install` command to install it:
+composer](http://getcomposer.org).
 
-    {
-        "require": {
-            "radebatz/managed-service": "2.0.*@dev"
-        }
-    }
+
+Install the latest version with:
+```
+$ composer require radebatz/managed-service
+```
 
 Alternatively, you can download the [`managed-service.zip`][1] file and extract it.
 
 
-
 ## Tests
-
 Managed service comes with a (comprehensive) set of unit tests.
 
 To run the test suite, you will need [PHPUnit](http://phpunit.de/manual/current/en/).
@@ -52,9 +47,7 @@ To run the test suite, you will need [PHPUnit](http://phpunit.de/manual/current/
 
 
 ## License
-
 Managed service is licensed under the MIT license.
-
 
 
 [1]: https://github.com/DerManoMann/managed-service/archive/master.zip
